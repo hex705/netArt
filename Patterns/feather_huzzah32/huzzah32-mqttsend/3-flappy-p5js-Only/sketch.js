@@ -10,7 +10,7 @@ let fallImg;
 let drawImage;
 
 let drawSize= 200;
-let drawX=150, xSpeed=0, oldXSpeed;
+let drawX=150, xSpeed=0, oldXSpeed=0;
 
 function preload() {
   flapImg = loadImage('/assets/flappy_1.png');
@@ -34,21 +34,21 @@ function draw() {
 }
 
 function moveBird(){
+
   drawX += xSpeed;
   if( drawX > width) drawX = 0;
   if ( drawX < 0) drawX = width;
+
   console.log("x " + drawX);
 }
 
 function changeBirdXSpeed(){
   // pick a number from 1- 100;
   xSpeed = oldXSpeed;
-  let x = random()*100;
+  let x = random(100);
   // if bigger than 80, change speed
   if (x >= 80){
-    let temp = random()*10;
-      console.log("temp" + temp);
-    xSpeed = floor(map(temp,0,10,-5,5));
+     xSpeed = floor(random(-5, 5));
   }
   oldXSpeed = xSpeed;
   console.log("new x speed " + xSpeed);
