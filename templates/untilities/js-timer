@@ -1,0 +1,9 @@
+
+// do not put these in draw -- it just messes everything up
+
+
+  var= setInterval(fxn, interval);
+
+  intervalId = setInterval(buildColorMessage, 2000);
+
+  clearInterval(intervalId);

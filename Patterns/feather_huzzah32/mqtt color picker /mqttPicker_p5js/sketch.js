@@ -9,7 +9,7 @@ the values are then sent to RGB LED attached to a feather
 created for netArt by hex705 (steve daniels) , Feb 2022
 
 */
-
+var v;
 // MQTT client:
 let mqttClient;
 
@@ -36,6 +36,7 @@ let latestData="";
 let elements;
 
 function setup() {
+  v = createVector(3,4);
   // canvas basics
   cnv = createCanvas(1000,750);
   cnv.position(20, 100);
