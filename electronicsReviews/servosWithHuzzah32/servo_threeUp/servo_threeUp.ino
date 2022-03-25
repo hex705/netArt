@@ -87,16 +87,17 @@ void setup() {
 void loop() {
 
 	for (pos = 0; pos <= 180; pos += 5) { // goes from 0 degrees to 180 degrees
-		// in steps of 1 degree
+		// in steps of 5 degree
 		  myservoGreen.write(pos); 
       myservoBlue.write(pos); 
       myservoWhite.write(pos);    // tell servo to go to position in variable 'pos'
 		delay(10);                    // wait 10ms for the servo to reach the position
 	}
 	for (pos = 180; pos >= 0; pos -= 5) { // goes from 180 degrees to 0 degrees
-		  myservoGreen.write(pos); 
+		  // in steps of 5 degree
+      myservoGreen.write(pos); 
       myservoBlue.write(pos); 
       myservoWhite.write(pos);    // tell servo to go to position in variable 'pos'
-		delay(10);                    // wait 10ms for the servo to reach the position
+    delay(10);                    // wait 10ms for the servo to reach the position
 	}
 }
