@@ -235,9 +235,23 @@ setPlayerCount(k){
     this.maxScore = _mS;
   }
 
+  addPlayerConnection(whichPlayer){
+    if (whichPlayer == 1){
+      playerOneConnected = true;
+      this.playersConnected+=1;
+    } else if (whichPlayer ==2){
+      playerTwoConnected = true;
+      this.playersConnected+=1;
+    }
+  }
+
   setPlayersConnected(_pc){
+
     console.log("in setPlayersConnected, playerCOunt ==  "+this.playersCount+"  "+_pc);
+
       this.playersConnected = _pc;
+
+
       if (this.playersConnected == this.playersCount) {
         STATE = SKILL_LEVEL;
         console.log("we have all the expected players");

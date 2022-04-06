@@ -46,7 +46,7 @@ class Player {
   }
 
   update(){
-    this.drawPaddle(150,0,80);
+    this.drawPaddle(paddleColor);
   }
 
   drawPaddle(a,b,c){

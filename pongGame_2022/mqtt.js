@@ -52,7 +52,7 @@ function createMQTTClientCallbacks() {
 
 // called when the client connects
 function onConnect() {
-  console.log("client is connected");
+  console.log("Pong is connected to shiftr");
 
   // subscribe here :: technically you can subscribe to as many topics as you want
   mqttClient.subscribe(subscribeToPlayerOne);
@@ -116,7 +116,7 @@ function onMqttMessageArrived(message) {
 
   // if we get a player connection deal with it here
   if (elements[0]=="CONNECT"){
-    console.log("equals connect");
+    console.log("player connection attempt");
     if (theTopic == "playerOne"){
       playerOne(elements[0],0);
     }

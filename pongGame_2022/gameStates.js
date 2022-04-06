@@ -28,13 +28,14 @@ function getNumberOfPlayers() {
 
     if (keyPressed) {
       if (key > '0' && key < '3') {
-        console.log("key " +  key);
+        console.log("key in getPlayers ==  " +  key);
         //p.setPlayerCount(key)
         numberOfPlayers = key;
        p = new Pong(numberOfPlayers, maximumScore);
        //await delay(100); //https://stackoverflow.com/questions/17176046/pause-function-until-enter-key-is-pressed-javascript
-       console.log("players set to " + numberOfPlayers);
+       console.log("game created with players set to " + numberOfPlayers);
        STATE = AWAIT_PLAYERS;
+       console.log("STATE = AWAIT_PLAYERS");
       }
     }
 }
@@ -76,5 +77,5 @@ function getSkillLevel(){
   textFont ( scoreFont, 128);
   delay(500);
 
-  
+
 }

@@ -23,7 +23,8 @@ function keyPressed(e){
   }
 
   if ( key ==='r' || key === 'R'){
-    p.softReset();
+    console.log("reset");
+    p.gameReset();
     STATE = START; //RESET;
   }
 

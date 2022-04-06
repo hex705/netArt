@@ -1,7 +1,7 @@
 
 let myName = "steve";
 let controllerType = "ANALOG"; // leave this for now
-let publishTopic = "playerTwo";
+let publishTopic = "playerOne";
 
 // MQTT client:
 let mqttClient;
@@ -27,7 +27,7 @@ let subscribeTopic = "pongGame"; //out of the box this loops back
 function setup() {
   // canvas basics
   cnv = createCanvas(100,512);
-  cnv.position(0, 0);
+  cnv.position(250, 0);
   colorMode(RGB, 255);
 
   // Create an MQTT client:

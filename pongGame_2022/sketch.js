@@ -67,7 +67,7 @@ function setup() {
   // all those colors
   c = color(255,0,0);
   fieldColor = 'Black';
-  paddleColor = color(100,0,80);
+  paddleColor = color(200,0,150);
   scoreColor = color(243, 156, 18);
   wallColor = 'lightGrey';//color(255,255,255);
   netColor = 'Green';
@@ -94,9 +94,9 @@ function draw() {
     case AWAIT_PLAYERS:
        maintainScreen();
        displayWaitMessage();
-      
+
       //  if (playerCount == p.players)  {STATE = INTRO;}
-      if (playerCount == p.playersCount) STATE = SKILL_LEVEL;
+      if (p.playersConnected == p.playersCount) STATE = SKILL_LEVEL;
     break;
 
     case SKILL_LEVEL:
