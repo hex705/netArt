@@ -67,10 +67,10 @@ function setup() {
   // all those colors
   c = color(255,0,0);
   fieldColor = 'Black';
-  paddleColor = color(200,0,150);
+  paddleColor = color(255,255,255);
   scoreColor = color(243, 156, 18);
   wallColor = 'lightGrey';//color(255,255,255);
-  netColor = 'Green';
+  netColor = 'Red';
   ballColor = 'Yellow';
 
   //connect to shiftr these fxns in mqtt.js
@@ -96,7 +96,7 @@ function draw() {
        displayWaitMessage();
 
       //  if (playerCount == p.players)  {STATE = INTRO;}
-      if (p.playersConnected == p.playersCount) STATE = SKILL_LEVEL;
+      //if (p.playersConnected == p.playersCount) STATE = SKILL_LEVEL;
     break;
 
     case SKILL_LEVEL:
@@ -105,19 +105,17 @@ function draw() {
     break;
 
     case SERVE:
-       //console.log("serve");
        p.serve();
 
     break;
 
     case RALLY:
-
        p.update();
 
     break;
 
     case GOAL:
-
+       sleep(500);
        STATE = SERVE;
       // delay(250);
 
@@ -171,4 +169,101 @@ function sleep(milliseconds) {
   do {
     currentDate = Date.now();
   } while (currentDate - date < milliseconds);
+}
+
+function onMqttMessageArrived(message) {
+
+  //debugIncomingMessage(message);
+
+  // unpack the payload - its a string of form [*,#] even though one data point per message (just like serial)
+  let currentString = message.payloadString;
+  trim(currentString); // remove white space
+  if (!currentString) return; // if empty
+  latestData = currentString; // for display
+
+  // parse the incoming string to extract data
+  // there will only be an elements[0] at end
+  elements = currentString.slice(1); // remove start byte
+  elements = elements.toString().split(","); // split on commas
+
+  // grab the topic of the current message
+  let theTopic = message.destinationName;
+
+// remove the connect message structure entirely
+// simplify this
+  if( STATE == AWAIT_PLAYERS) {
+    if (theTopic == "playerOne"){
+      if (!p.players[1].getConnectionStatus()){
+        // if false, not connected yet
+        console.log("playerONE trying to connect");
+        playerConnect(elements[0],0,1);
+      }
+    }
+    if (theTopic == "playerTwo"){
+      if (!p.players[2].getConnectionStatus()){
+        // not connected yet
+        console.log("playerTWO not yet connected");
+        playerConnect(elements[0],0,2);
+      }
+    }
+  } // wait for players
+
+  // // if we get a player connection deal with it here
+  // if (elements[0]=="CONNECT"){
+  //   console.log("player connection attempt");
+  //   if (theTopic == "playerOne"){
+  //     console.log("p1 attempt");
+  //     playerOneConnect(elements[0],0);
+  //   }
+  //   if (theTopic == "playerTwo"){
+  //     console.log("p2 attempt");
+  //     playerTwo(elements[0],0);
+  //   }
+  // }
+
+    //[*,playerName,controllerType,value,#];
+
+  // we are subscribed to two <topics> -- so we must figure out which topic just spoke
+  switch (theTopic) {
+    case "playerOne":
+       playerIndex = 1;
+       //playerType = elements[1];
+       playerMove = elements[1];
+       p.players[1].movePaddle(playerMove);
+      break;
+    case "playerTwo":
+       playerIndex = 2;
+       //playerType = elements[1];
+       playerMove = elements[1];
+       p.players[2].movePaddle(playerMove);
+
+      break;
+    default:
+      //  do nothing
+  }
+
+}
+
+
+function playerConnect( _s, _val, _index ) {
+
+  // these are globals
+  playerIndex = _index;
+  playerType = _s;
+  playerMove = _val;
+
+    console.log("connecting player " + playerIndex);
+
+  if ( !p.players[playerIndex].getConnectionStatus()) {
+      playerCount++;
+    //  p.setPlayersConnected(playerIndex);
+      p.players[playerIndex].setConnectionStatus(true);
+      p.updatePlayersConnected();
+      //playerOneConnected = true;
+      console.log("connecting player " + playerIndex);
+      // maybe move name to here?
+    }
+
+  p.players[playerIndex].movePaddle(playerMove);
+
 }

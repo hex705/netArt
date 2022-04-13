@@ -1,6 +1,7 @@
 class Player {
 
   skillScale = 25;
+  isConnected = false;
 
   constructor( _id,  _skill){
 
@@ -26,6 +27,9 @@ class Player {
 
   } // end player constructor
 
+  connect(){
+
+  }
 
   setSkill(s){
     console.log("in players setSkill(), s ==  " + s);
@@ -70,7 +74,7 @@ class Player {
   }
 
   setPaddleHeight(h){  // input can be 0 - 255
-     this.y = map (h,0,255, border, theCanvas.height);
+     this.y = map (h,0,255, border, theCanvas.height-border-this.skill);
   }
 
 
@@ -101,5 +105,52 @@ class Player {
   getX(){
     return this.x;
   }
+
+  movePaddle(theMove) {
+      this.setPaddleHeight( theMove ) ;
+  } //end movePaddle
+
+  getConnectionStatus(){
+    return this.isConnected;
+  }
+  setConnectionStatus(s){
+    this.isConnected = s;
+  }
+
+  // playerOneConnect( s, val ) {
+  //
+  //   playerIndex = 1;
+  //   playerType = s;
+  //   playerMove = val;
+  //
+  //   if ( !playerOneConnected ) {
+  //       playerCount++;
+  //       p.setPlayersConnected(1);
+  //       playerOneConnected = true;
+  //       console.log("connecting player 1");
+  //       // maybe move name to here?
+  //     }
+  //     this.isConnected = true;
+  //
+  //   this.doSomething();
+  // }
+  //
+  // playerTwoConnect( s, val ) {
+  //
+  //     playerIndex = 2;
+  //     playerType = s;
+  //     playerMove = val;
+  //
+  //   if ( !playerTwoConnected ) {
+  //       playerCount++;
+  //       p.setPlayersConnected(2);
+  //       playerTwoConnected = true;
+  //       // move name to here ?
+  //     }
+  //     this.isConnected = true;
+  //     this.doSomething();
+  // }
+
+
 
 } // end player

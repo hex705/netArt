@@ -11,7 +11,7 @@ function maintainScreen(){
 function getNumberOfPlayers() {
     fill(0);
     noStroke();
-    rect(width/2-250, height/2-40, 500, 80);
+  //  rect(width/2-250, height/2-40, 500, 80);
 
     // Pong
     fill(0,200,50);
@@ -45,21 +45,20 @@ function delay(ms) {
 }
 
 function displayWaitMessage() {
-
   textFont(scoreFont, 40);
   fill(0);
   noStroke();
 
   let waitString = String ("Waiting for players");
   let waitWidth = textWidth(waitString);
-  rect(width/2-waitWidth/2-20, height/2-50, waitWidth+40, 150);
+  rect(width/2-waitWidth/2-20, height/2-50, waitWidth+40, 400);
 
   fill(255, 0, 0);
-  text (waitString , width/2-waitWidth/2, height/2+50);
+  text (waitString , width/2-waitWidth/2+50, height/2+50);
 
   let cc = String ( "Currently " + p.playersConnected + " connected");
   ccWidth  = textWidth(cc);
-  text ( cc , width/2-ccWidth/2, height/2+100);
+  text ( cc , width/2-ccWidth/2+50, height/2+100);
 
   textFont (scoreFont, 128);  // what is this for -- scores I guess ?
   // NOTE :: player count currently switched in controls.

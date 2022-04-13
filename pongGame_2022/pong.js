@@ -206,10 +206,16 @@ setPlayerCount(k){
 
     let vX = (this.lastPoint == 1) ? 2 : -2;
     this.f.ball.velX = vX;
-    this.f.ball.velY = -0.5;
-  //  if ( edgeFlag )  {
-      //this.f.ball.velY = 0.5;
+    if (p.players[this.lastPoint].y > height/2){
+      this.f.ball.velY = -0.5;
+    } else {
+      this.f.ball.velY = 0.5;
+    }
+
+     if ( edgeFlag )  {
+       this.f.ball.velY = 1;
       // this.f.ball.locY > (theCanvas.height-border)
+    }
   }
 
   softReset() {
@@ -245,9 +251,57 @@ setPlayerCount(k){
     }
   }
 
-  setPlayersConnected(_pc){
+  updatePlayersConnected(){
+    console.log("in pong.getPlayersConnected");
+    let tempCount = 0;
+    if (this.players[1].getConnectionStatus()){
+      tempCount+=1;
+      console.log("playerOne is connected");
+    }
+    if ( this.playersCount == 2 ){
+      if (this.players[2].getConnectionStatus()){
+        tempCount+=2;
+        console.log("playerTwo is now connected");
+      }
+    }
+    console.log("total connected == " + tempCount);
+    //
+    switch (tempCount){
+     case 1 :
+      this.playersConnected = 1;
+       // only playerOne connected
+       if (this.playersCount == 1 ){
 
-    console.log("in setPlayersConnected, playerCOunt ==  "+this.playersCount+"  "+_pc);
+         // only need one player
+         STATE = SKILL_LEVEL;
+       } else {
+         console.log("awaiting player 2");
+       }
+       break;
+     case 2:
+       // only player 2 connected
+       this.playersConnected = 1;
+       console.log("awaiting player 1");
+       break;
+     case 3:
+       // both players connected
+       if (this.playersCount == 2 ){
+         STATE = SKILL_LEVEL;
+         console.log("both players connected");
+       }
+       this.playersConnected = 2;
+       break;
+
+    }
+    //  STATE = SKILL_LEVEL;
+    //  console.log("we have all the expected players");
+
+
+  }
+
+  setPlayersConnected(idx){
+
+    console.log("in setPlayersConnected, playerCount ==  "+this.playersCount+"  "+_pc);
 
       this.playersConnected = _pc;
 

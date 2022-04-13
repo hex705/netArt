@@ -6,7 +6,7 @@ class Ball {
     this.locY = random(0,theCanvas.height);
     this.velX = 10;//was 100
     this.velY =  1;
-    this.ballSize = 10;
+    this.ballSize = 20;
 
   } // end constructor
 

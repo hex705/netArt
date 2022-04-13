@@ -96,57 +96,59 @@ function publishMqttMessage(topic, package) {
 // for demo purposes I decided to use 2 topics rather than bunching these into one message.
 // finally, remember -- an MQTT message has a payload and a topic
 
-function onMqttMessageArrived(message) {
-
-  //debugIncomingMessage(message);
-
-  // unpack the payload - its a string of form [*,#] even though one data point per message (just like serial)
-  let currentString = message.payloadString;
-  trim(currentString); // remove white space
-  if (!currentString) return; // if empty
-  latestData = currentString; // for display
-
-  // parse the incoming string to extract data
-  // there will only be an elements[0] at end
-  elements = currentString.slice(1); // remove start byte
-  elements = elements.toString().split(","); // split on commas
-
-  // grab the topic of the current message
-  let theTopic = message.destinationName;
-
-  // if we get a player connection deal with it here
-  if (elements[0]=="CONNECT"){
-    console.log("player connection attempt");
-    if (theTopic == "playerOne"){
-      playerOne(elements[0],0);
-    }
-    if (theTopic == "playerOne"){
-      playerTwo(elements[0],0);
-    }
-  }
-
-    //[*,playerName,controllerType,value,#];
-
-  // we are subscribed to two <topics> -- so we must figure out which topic just spoke
-  switch (theTopic) {
-    case "playerOne":
-       playerIndex = 1;
-       playerType = elements[1];
-       playerMove = elements[2];
-       doSomething();
-      break;
-    case "playerTwo":
-       playerIndex = 2;
-       playerType = elements[1];
-       playerMove = elements[2];
-       doSomething();
-
-      break;
-    default:
-      //  do nothing
-  }
-
-}
+// function onMqttMessageArrived(message) {
+//
+//   debugIncomingMessage(message);
+//
+//   // unpack the payload - its a string of form [*,#] even though one data point per message (just like serial)
+//   let currentString = message.payloadString;
+//   trim(currentString); // remove white space
+//   if (!currentString) return; // if empty
+//   latestData = currentString; // for display
+//
+//   // parse the incoming string to extract data
+//   // there will only be an elements[0] at end
+//   elements = currentString.slice(1); // remove start byte
+//   elements = elements.toString().split(","); // split on commas
+//
+//   // grab the topic of the current message
+//   let theTopic = message.destinationName;
+//
+//   // if we get a player connection deal with it here
+//   if (elements[0]=="CONNECT"){
+//     console.log("player connection attempt");
+//     if (theTopic == "playerOne"){
+//       console.log("p1 attempt");
+//       playerOneConnect("CONNECT",0);
+//     }
+//     if (theTopic == "playerTwo"){
+//       console.log("p2 attempt");
+//       playerTwo(elements[0],0);
+//     }
+//   }
+//
+//     //[*,playerName,controllerType,value,#];
+//
+//   // we are subscribed to two <topics> -- so we must figure out which topic just spoke
+//   switch (theTopic) {
+//     case "playerOne":
+//        playerIndex = 1;
+//        playerType = elements[1];
+//        playerMove = elements[2];
+//        doSomething();
+//       break;
+//     case "playerTwo":
+//        playerIndex = 2;
+//        playerType = elements[1];
+//        playerMove = elements[2];
+//        doSomething();
+//
+//       break;
+//     default:
+//       //  do nothing
+//   }
+//
+// }
 
 // look inside an incoming MQTT message
 function debugIncomingMessage(m) {
