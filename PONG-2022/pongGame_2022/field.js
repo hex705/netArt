@@ -3,7 +3,7 @@ class Field {
   constructor (numPlayers, s){
       this.numberOfPLayers = numPlayers;
       this.ball = new Ball();
-      this.border = 50;
+      this.border = 100;
       this.edgeWidth = 12;
       this.netWidth = 10;
       this.update();
@@ -26,7 +26,6 @@ class Field {
 
     background(fieldColor);
 
-
     if ( this.numberOfPLayers == 2) {
       // drawNet
       strokeWeight(this.netWidth);
@@ -41,7 +40,7 @@ class Field {
 
       } // end for
     } // end if
-    
+
     stroke(wallColor);
     strokeWeight(edgeWidth);
     fill(wallColor);
@@ -54,6 +53,8 @@ class Field {
        // draw right side as solid
        line(width-border,border,width-border,height-border);
      }
+
+
 
 
 

@@ -89,29 +89,67 @@ drawScore(){
 
        let s = String ("" + this.players[1].getScore() );
 
-       text(s,width-border-textWidth(s)-10,150); // undefined?
+       text(s,width-border-textWidth(s)-10,(100+border)); // undefined?
+       this.drawPlayerOneName();
 
      }
      else if (this.playersCount == 2) {
 
        let s = String ( this.players[1].getScore()  + "   " + this.players[2].getScore());
-       text(s,theCanvas.width/2,150);
+       text(s,theCanvas.width/2,(100+border));
+       this.drawPlayerOneName();
+       this.drawPlayerTwoName();
      }
   pop();
 
   }
 
+  drawPlayerOneName(){
+
+           let pString1 = String(this.players[1].playerName);
+          //  console.log(this.players[1].playerName);
+           push();
+            fill(nameColor);
+            textSize(60);
+            textAlign(LEFT);
+            let angle1 = radians(0);
+            translate((this.players[1].x), theCanvas.height-15);
+            rotate(angle1);
+            text(pString1,0,0); //
+           pop();
+
+  }
+
+  drawPlayerTwoName(){
+
+           let pString2 = String(this.players[2].playerName);
+          //  console.log(this.players[1].playerName);
+           push();
+            fill(nameColor);
+            textSize(60);
+            textAlign(RIGHT);
+            let angle2 = radians(0);
+            translate((this.players[2].x), theCanvas.height-15);
+            rotate(angle2);
+            text(pString2,0,0); //
+           pop();
+
+  }
+
+
 checkForHit(){
 
-   // println("checking");
+  let HIT = 1;
 
+   // println("checking");
     if (this.f.ball.locX - this.f.ball.ballSize/2  <= this.players[1].x) {
-      console.log("on player 1 line ");
+    //  console.log("on player 1 line ");
       // on the goal -- did we hit the paddle
       if (this.players[1].hitTheBall(this.f.ball.locY, this.f.ball.ballSize) ) {
-        console.log("pong - hit");
+        let s = String ("*"+HIT+",1,#"); // hit by player 1
+        publishMqttMessage("pongGame", s);
         this.f.ball.velX *= -1.1;
-        if (this.f.ball.velX > 80) this.f.ball.velX =80;
+        if (this.f.ball.velX > 80) this.f.ball.velX = 80;
       } else {
         this.f.ball.locX = -5;
         this.goal(this.f.ball.velX);  // used to be in ball
@@ -121,15 +159,16 @@ checkForHit(){
    if (this.playersCount == 2) {
      // if the ball is on the paddle in terms of X
      if (this.f.ball.locX + this.f.ball.ballSize/2 >= this.players[2].x) {
-         console.log("on the player 2 line");
+         //console.log("on the player 2 line");
         if (this.players[2].hitTheBall(this.f.ball.locY, this.f.ball.ballSize) ) {
+          let s = String ("*"+HIT+",2,#"); // hit by player 2
+          publishMqttMessage("pongGame", s);
           this.f.ball.velX *= -1.1;
           if (this.f.ball.velX > 80) this.f.ball.velX =80;
         } else {
         this.f.ball.locX = width + 5;
         this.goal(this.f.ball.velX); // used to be in ball.
       }
-
      }
     }
 
@@ -145,17 +184,21 @@ checkForHit(){
 
 
  goal(vel) {
+   let A_GOAL = 2;
    let pointGetter = 1;
    if (vel < 0  && this.playersCount == 2 )  {
      pointGetter +=1; // if the ball was moving left then p 2 scored.
    }
     this.players[pointGetter].score+=1;
     this.lastPoint = pointGetter;
+    let s = String ("*"+ A_GOAL + ","+pointGetter+",#");
+    publishMqttMessage("pongGame", s);
     STATE = GOAL;
 
  } // end goal
 
  checkForWin(){
+   let WINNER = 3;
   // println("did i win");
    for(let i=1; i <=this.playersCount; i++){
     // println("checking each player");
@@ -164,6 +207,8 @@ checkForHit(){
      //  println("we have a ner");
          this.winner = i;
          STATE = WIN;
+         let s = String ("*"+ WINNER + ","+i+",#");
+         publishMqttMessage("pongGame", s);
      }//end if
    }// end for
  }// end check

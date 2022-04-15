@@ -9,7 +9,7 @@ function maintainScreen(){
 }
 
 function getNumberOfPlayers() {
-    fill(0);
+    fill(fieldColor);
     noStroke();
   //  rect(width/2-250, height/2-40, 500, 80);
 
@@ -31,7 +31,7 @@ function getNumberOfPlayers() {
         console.log("key in getPlayers ==  " +  key);
         //p.setPlayerCount(key)
         numberOfPlayers = key;
-       p = new Pong(numberOfPlayers, maximumScore);
+        p = new Pong(numberOfPlayers, maximumScore);
        //await delay(100); //https://stackoverflow.com/questions/17176046/pause-function-until-enter-key-is-pressed-javascript
        console.log("game created with players set to " + numberOfPlayers);
        STATE = AWAIT_PLAYERS;
@@ -46,7 +46,7 @@ function delay(ms) {
 
 function displayWaitMessage() {
   textFont(scoreFont, 40);
-  fill(0);
+  fill(fieldColor);
   noStroke();
 
   let waitString = String ("Waiting for players");
@@ -67,12 +67,12 @@ function displayWaitMessage() {
 function getSkillLevel(){
 
   textFont(scoreFont, 40);
-
+  fill(fieldColor);
   noStroke();
-  //rect(190, 175, 400, 125);
+  rect(width/2-100, 150, 600, 400);
   fill(255, 0, 0);
 
-  text ("SELECT LEVEL: \n\r1) Super Simple\n\r2) Moderately Impossible\n\r3) Bone Crushing", width/2-100, 200);
+  text ("SELECT LEVEL: \n\r1) Super Simple\n\r2) Moderately Impossible\n\r3) Bone Crushing", width/2-100, height/2-200);
   textFont ( scoreFont, 128);
   delay(500);
 

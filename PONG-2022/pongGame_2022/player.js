@@ -2,6 +2,7 @@ class Player {
 
   skillScale = 25;
   isConnected = false;
+  playerName = "";
 
   constructor( _id,  _skill){
 
@@ -31,6 +32,10 @@ class Player {
 
   }
 
+  setName(n){
+    this.playerName=n;
+  }
+
   setSkill(s){
     console.log("in players setSkill(), s ==  " + s);
     let temp = 2;
@@ -51,6 +56,10 @@ class Player {
 
   update(){
     this.drawPaddle(paddleColor);
+  }
+
+  drawNames(){
+
   }
 
   drawPaddle(a,b,c){
@@ -77,18 +86,17 @@ class Player {
      this.y = map (h,0,255, border, theCanvas.height-border-this.skill);
   }
 
-
   hitTheBall( ballY, bSize ) {
     let hit = false;
     let paddleTop = this.y;
     let paddleBottom = this.y+this.skill;
-    console.log("ballY "+ ballY + " paddleTop " + paddleTop + "  sum " + paddleBottom);
+    //console.log("ballY "+ ballY + " paddleTop " + paddleTop + "  sum " + paddleBottom);
    // if ( (ballY+bSize/2 > y) && (ballY+bSize/2 < (y+skill) )) {
-    console.log("type of ball y " + typeof ballY);
+    //console.log("type of ball y " + typeof ballY);
 
     if ( paddleTop < ballY+bSize/2 && paddleBottom > ballY-bSize/2) {
-      console.log(" in player hit the ball == yup its a hit");
-       hitSound.play();
+    //  console.log(" in player hit the ball == yup its a hit");
+      hitSound.play();
       hit = true;
     } else {
       console.log("player missed");

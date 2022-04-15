@@ -5,7 +5,7 @@ int touchPin2 = T6;
 int touchValue1;
 int touchValue2;
 
-int threshold = 40;
+int threshold = 30;
 
 void setup() {
   // put your setup code here, to run once:

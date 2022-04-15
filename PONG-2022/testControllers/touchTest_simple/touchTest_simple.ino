@@ -1,9 +1,8 @@
-int touchPin1 = T3;
-int touchPin2 = T6;
-int touchValue1;
-int touchValue2;
 
-int threshold = 40;
+int touchPin1 = T3;
+int touchValue1;
+
+int threshold = 40; // use plotter to define
 
 void setup() {
   // put your setup code here, to run once:
@@ -13,12 +12,13 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   touchValue1 = touchRead(touchPin1);
-  touchValue2 = touchRead(touchPin2);
-  
-  Serial.println(touchValue1);
-  Serial.print('\t');
-  Serial.print(touchValue2);
+
+  Serial.print(touchValue1);
   Serial.print('\t');
   Serial.println(threshold);
-  
+  delay(50);// affects repeat 
 }
+
+
+
+ 

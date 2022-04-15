@@ -17,8 +17,8 @@ let creds = {
 
 // topic to subscribe to when you connect:
 let publishTopic = "pongGame"; // when pub/sub are same you loopback data
-let subscribeToPlayerOne = "playerOne";
-let subscribeToPlayerTwo = "playerTwo";
+// let subscribeToPlayerOne = "playerOne";
+// let subscribeToPlayerTwo = "playerTwo";
 
 
 // called from setup
@@ -77,12 +77,12 @@ function publishMqttMessage(topic, package) {
     package = String(package);
     let publishMessage = new Paho.MQTT.Message(package);
     // choose the destination topic:
-    console.log('topic ' + topic);
+    //console.log('topic ' + topic);
     publishMessage.destinationName = topic;
     // send it:
     mqttClient.send(publishMessage);
     // print what you sent:
-    console.log("sending :: " + publishMessage.payloadString);
+    //  console.log("sending :: " + publishMessage.payloadString);
   } // end color check
 }
 

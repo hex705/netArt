@@ -1,3 +1,18 @@
+
+//===================================================
+// global variables -- move to top of main file
+
+#include <WiFi.h>
+WiFiClient wifiClient;  // part of wifi.h
+
+//===================================================
+// setup -- before transport protocols that use this
+
+initWiFi();
+
+//===================================================
+// initialize -- leave in own tab or at bottom of main code
+
 void initWiFi() {
   WiFi.mode(WIFI_STA);  // station mode
   WiFi.begin(ssid, password);

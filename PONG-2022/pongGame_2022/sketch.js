@@ -2,6 +2,16 @@
 // https://github.com/p5-serial/p5.serialport
 // needs serial control app
 
+// game day subscriptions
+//let subscribeToPlayerOne = "playerOne";
+//let subscribeToPlayerTwo = "playerTwo";
+
+//**************************************************
+// simplified testing subscriptions
+let subscribeToPlayerOne = "playerOne";
+let subscribeToPlayerTwo = "playerTwo";
+//**************************************************
+
 let theCanvas;
 let fs;
 
@@ -12,7 +22,7 @@ let numberOfPlayers = 1;
 let maximumScore = 3;
 
 // globals for board
-let border = 50;
+let border = 75;
 let edgeWidth = 12;
 let netWidth = 10;
 
@@ -43,6 +53,7 @@ let wallColor;
 let netColor;
 let fieldColor;
 let ballColor;
+let nameColor;
 
 let playerOneConnected = false;
 let playerTwoConnected = false;
@@ -50,6 +61,7 @@ let playerTwoConnected = false;
 let playerIndex = -1;
 let playerType = "";
 let playerMove = -1;
+let playerName = "";
 
 
 function preload(){
@@ -61,17 +73,18 @@ function preload(){
 function setup() {
 
   theCanvas = createCanvas(windowWidth-500, windowHeight-250);
-  console.log(windowWidth +"  "+ windowHeight);
+  //console.log(windowWidth +"  "+ windowHeight);
   theCanvas.position(250,125);
 
   // all those colors
-  c = color(255,0,0);
-  fieldColor = 'Black';
-  paddleColor = color(255,255,255);
+  c = color(200,0,200);
+  fieldColor = 'LightGreen';
+  paddleColor = color(0,0,255);
   scoreColor = color(243, 156, 18);
-  wallColor = 'lightGrey';//color(255,255,255);
-  netColor = 'Red';
-  ballColor = 'Yellow';
+  wallColor = 'Purple';//color(255,255,255);
+  netColor = 'White';
+  ballColor = 'Orange';
+  nameColor = 'black';
 
   //connect to shiftr these fxns in mqtt.js
   createMQTTClientObject();
@@ -185,55 +198,43 @@ function onMqttMessageArrived(message) {
   // there will only be an elements[0] at end
   elements = currentString.slice(1); // remove start byte
   elements = elements.toString().split(","); // split on commas
-
+  //console.log(elements[1]);
   // grab the topic of the current message
   let theTopic = message.destinationName;
 
 // remove the connect message structure entirely
 // simplify this
   if( STATE == AWAIT_PLAYERS) {
-    if (theTopic == "playerOne"){
+    if (theTopic == subscribeToPlayerOne){
       if (!p.players[1].getConnectionStatus()){
         // if false, not connected yet
         console.log("playerONE trying to connect");
-        playerConnect(elements[0],0,1);
+        playerConnect(elements[1],elements[0],1);
       }
     }
-    if (theTopic == "playerTwo"){
+    if (theTopic == subscribeToPlayerTwo){
       if (!p.players[2].getConnectionStatus()){
         // not connected yet
         console.log("playerTWO not yet connected");
-        playerConnect(elements[0],0,2);
+        playerConnect(elements[1],elements[0],2);
       }
     }
   } // wait for players
 
-  // // if we get a player connection deal with it here
-  // if (elements[0]=="CONNECT"){
-  //   console.log("player connection attempt");
-  //   if (theTopic == "playerOne"){
-  //     console.log("p1 attempt");
-  //     playerOneConnect(elements[0],0);
-  //   }
-  //   if (theTopic == "playerTwo"){
-  //     console.log("p2 attempt");
-  //     playerTwo(elements[0],0);
-  //   }
-  // }
 
     //[*,playerName,controllerType,value,#];
 
   // we are subscribed to two <topics> -- so we must figure out which topic just spoke
   switch (theTopic) {
-    case "playerOne":
+    case subscribeToPlayerOne:
        playerIndex = 1;
-       //playerType = elements[1];
+       //playerName = elements[0];
        playerMove = elements[1];
        p.players[1].movePaddle(playerMove);
       break;
-    case "playerTwo":
+    case subscribeToPlayerTwo:
        playerIndex = 2;
-       //playerType = elements[1];
+       //playerName = elements[0];
        playerMove = elements[1];
        p.players[2].movePaddle(playerMove);
 
@@ -245,12 +246,12 @@ function onMqttMessageArrived(message) {
 }
 
 
-function playerConnect( _s, _val, _index ) {
+function playerConnect( _s, _name, _index ) {
 
   // these are globals
   playerIndex = _index;
   playerType = _s;
-  playerMove = _val;
+  playerName = _name;
 
     console.log("connecting player " + playerIndex);
 
@@ -258,12 +259,13 @@ function playerConnect( _s, _val, _index ) {
       playerCount++;
     //  p.setPlayersConnected(playerIndex);
       p.players[playerIndex].setConnectionStatus(true);
+      p.players[playerIndex].setName(playerName);
       p.updatePlayersConnected();
       //playerOneConnected = true;
       console.log("connecting player " + playerIndex);
       // maybe move name to here?
     }
 
-  p.players[playerIndex].movePaddle(playerMove);
+  p.players[playerIndex].movePaddle(127);
 
 }

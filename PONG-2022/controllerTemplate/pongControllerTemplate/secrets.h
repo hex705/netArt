@@ -6,11 +6,14 @@
 
 
 // wifi login info
-// generic
-// const char ssid[] = "YOUR_WIFI_NAME"; // wifi name
-// const char password[] = "YOUR_WIFI_PASSWORD"; // wifi password
 
-// class
+//const char ssid[] = "YOUR_WIFI_NAME"; // wifi name
+//const char password[] = "YOUR_WIFI_PASSWORD"; // wifi password
+
+const char ssid[] = "someFruit"; // wifi name
+const char password[] = "sevenAppleBanana@705!"; // wifi password
+
+
 // const char ssid[] = "NETART"; // wifi name
 // const char password[] = "rapiddiamond499"; // wifi password
 
@@ -25,6 +28,6 @@ const char broker[] = "public.cloud.shiftr.io"; // yes this url for SHFTR even w
 int        port     = 1883; // 8883 secure
 
 // user ID for the broker --> derived from links above
-const char id[]     = "sd_controller";  // your shiftr device name
+const char id[]     = "MY_ESP32_FEATHER";  // your shiftr device name
 const char user[]   = "public";    // your shiftr instance
 const char mqttPW[] = "public"; // your shiftr token secret

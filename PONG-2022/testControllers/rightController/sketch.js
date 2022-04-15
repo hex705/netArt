@@ -5,7 +5,7 @@
 //  '*' +myName+',' + controllerValue + ',#'
 
 
-let myName = "steve";
+let myName = "sasquatch simpson";
 let controllerType = "ANALOG"; // leave this for now
 let publishTopic = "playerTwo";
 
