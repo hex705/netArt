@@ -50,6 +50,9 @@ class Pong {
 
     this.playerOneConnected = false;
     this.playerTwoConnected = false;
+
+    let s = String ("*4,2,#"); // hit by player 2
+    publishMqttMessage("pongGame", s);
   }
 
   serve(){
@@ -279,7 +282,8 @@ setPlayerCount(k){
      }
 
     this.drawScore();
-
+    let s = String ("*4,2,#"); // hit by player 2
+    publishMqttMessage("pongGame", s);
   }
 
   setMaxScore( _mS) {

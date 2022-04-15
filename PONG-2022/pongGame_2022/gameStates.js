@@ -69,7 +69,7 @@ function getSkillLevel(){
   textFont(scoreFont, 40);
   fill(fieldColor);
   noStroke();
-  rect(width/2-100, 150, 600, 400);
+  rect(width/2-100, 150, 400, 200);
   fill(255, 0, 0);
 
   text ("SELECT LEVEL: \n\r1) Super Simple\n\r2) Moderately Impossible\n\r3) Bone Crushing", width/2-100, height/2-200);
