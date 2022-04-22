@@ -10,9 +10,6 @@
 // const char ssid[] = "YOUR_WIFI_NAME"; // wifi name
 // const char password[] = "YOUR_WIFI_PASSWORD"; // wifi password
 
-// class
- const char ssid[] = "NETART"; // wifi name
- const char password[] = "rapiddiamond499"; // wifi password
 
 
 // shiftr login info

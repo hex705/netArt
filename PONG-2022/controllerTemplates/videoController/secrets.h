@@ -10,9 +10,6 @@
 //const char ssid[] = "YOUR_WIFI_NAME"; // wifi name
 //const char password[] = "YOUR_WIFI_PASSWORD"; // wifi password
 
-const char ssid[] = "someFruit"; // wifi name
-const char password[] = "sevenAppleBanana@705!"; // wifi password
-
 
 // const char ssid[] = "NETART"; // wifi name
 // const char password[] = "rapiddiamond499"; // wifi password
