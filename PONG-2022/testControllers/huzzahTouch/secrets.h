@@ -11,7 +11,6 @@
 // const char password[] = "YOUR_WIFI_PASSWORD"; // wifi password
 
 
-
 // shiftr login info
 // https://www.shiftr.io/docs/manuals/arduino
 
