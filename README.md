@@ -9,3 +9,16 @@ The course archives specifically do have their own logic and order (this isnot t
 
 More information can be found online at [netArt.ca](www.netArt.ca)
 
+##Rename branch
+[ ignore if this is your first download ]
+
+The root branch of the online repository was renamed to MAIN in January 2026.
+
+You may need to do some work of you have downloaded an OLDER repository.  The repository should tell you. These commands should solve:
+
+```
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+```
