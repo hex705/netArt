@@ -12,7 +12,7 @@ let broker = {
 let creds = {
   clientID: DEVICE_NAME_IN_QUOTES, // "myDeviceName"
   mqttUser: INSTANCE_OR_USER_NAME, //  "instanceName"
-  mqttPW: CHECK_DtwoL_FOR_MQTT_KEY // secret - from token
+  mqttPW: CHECK_DtwoL_FOR_MQTT_KEY //  secret - from token
 };
 
 // topic to subscribe to when you connect:
@@ -86,13 +86,16 @@ function publishMqttMessage(topic, package) {
   } // end color check
 }
 
+
+
 // MQTT LISTEN -- called when a message arrives
 
 // NOTES ::  most of this function will be project specific -- you need to know what sort of data is coming in
 
-// to control the bird we need to receive
-// -- analogValue from photocell
-// -- digitalValue from button
+// to control the rectangles on screen
+// -- analogValue from photocell ---> height of left rectangle
+// -- digitalValue from button   ---> switch square to ball 
+
 // for demo purposes I decided to use 2 topics rather than bunching these into one message.
 // finally, remember -- an MQTT message has a payload and a topic
 

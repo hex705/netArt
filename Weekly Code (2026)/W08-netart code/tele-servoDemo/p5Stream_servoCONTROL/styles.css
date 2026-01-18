@@ -1,0 +1,11 @@
+leftButton{
+    color:white;
+}
+
+canvas {
+    display: inline;
+  }
+  
+  canvas.fullscreen {
+      display: block;
+  }

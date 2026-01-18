@@ -2,7 +2,7 @@
 // note order in html matters -- load secrets before
 
 // trying to keep these details off of github
-
+//
 let URL_FROM_INSTANCE = 'public.cloud.shiftr.io'; // "your-URL-from-token"
 
 let DEVICE_NAME_IN_QUOTES    = 'NAME-YOUR-DEVICE';

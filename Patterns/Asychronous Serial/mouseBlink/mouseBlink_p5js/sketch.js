@@ -3,7 +3,7 @@
 // needs serial control app
 
 let serial;
-let portName = "/dev/tty.usbmodem142201";
+let portName = "/dev/tty.usbserial-01434FB5"; 
 let theCanvas;
 let cycleLength=50;
 let duty = 0;

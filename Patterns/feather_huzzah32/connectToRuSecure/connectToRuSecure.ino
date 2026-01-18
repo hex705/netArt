@@ -12,7 +12,7 @@
 // wifi password and ssid in secrets.h
 #include "secrets.h"
 
-// this is memory intensive so for this demo only
+// this uses some memory -- can be removed once you get the hang of this.
 // wifi status is actually an int so, 
 // array position corresponds to numerical value of WiFi.status();
 String wifiStatusArray[7] = {"WL_IDLE_STATUS","WL_NO_SSID_AVAIL","WL_SCAN_COMPLETED","WL_CONNECTED","WL_CONNECT_FAILED","WL_CONNECTION_LOST","WL_DISCONNECTED"};

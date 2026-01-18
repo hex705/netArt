@@ -1,5 +1,9 @@
+// this example assumes an adafruit esp32 huzzah (other devices may work) 
+// this code uses MQTT to connects to the public 'try' instance of shifter.io
+// other (remote) devices can subscribe to the messages. 
 
-#include <WiFi.h>
+
+#include <WiFi.h> 
 #include <ArduinoMqttClient.h> // https://github.com/arduino-libraries/ArduinoMqttClient
 
 // wifi log on credentials -- secrets tab
@@ -57,10 +61,11 @@ void loop(){
     buildButtonMessage(buttonState);
     buildPhotocellMessage(photocellState);
     sendStartTime = currentTime;
-      //debugSensors();
+      //  debugSensors();
   }
 }
 
+// using the glue library to make a message
 void buildButtonMessage(int value){
   // use elmers to add the parsing syntax around value -- [*,#]
   elmers.create();
@@ -71,6 +76,7 @@ void buildButtonMessage(int value){
   publishMqttMessage(buttonTopic, payload);
 }
 
+// building a message manually with Strings (big S)
 void buildPhotocellMessage(int value){
   // build the parsable message from Strings
   sendMessage = "*";
@@ -80,9 +86,10 @@ void buildPhotocellMessage(int value){
   publishMqttMessage(photoCellTopic, sendMessage);
 }
 
+// local debug may interupt network messages
 void debugSensors(){
   Serial.print("buttonState :: \t");
-  Serial.println(buttonState);
-  Serial.print("photocellState :: \t");
+  Serial.print(buttonState);
+  Serial.print("\tphotocellState :: \t");
   Serial.println(photocellState);
 }

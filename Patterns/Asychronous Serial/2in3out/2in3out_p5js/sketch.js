@@ -9,12 +9,17 @@
  sendColor
  serialEvent
  drawAltBG
- 
 
 */
+
+// display variables 
+
+let theCanvas;
+
+// serial variables
 let serial;
 let portName = "/dev/tty.usbmodem142201";
-let theCanvas;
+
 let latestData="";
 let elements;
 let newData, xPos,yPos, quadrant, lastQuadrant;
@@ -88,7 +93,7 @@ function sendColor(r, g, b){
   //console.log("in send color ");
   if ( lastQuadrant != quadrant ) { // send only with new color
     console.log("send " + quadrant);
-    let sendString = '*' + r + ',' + g + ',' + b + '#'; // use protocol
+    let sendString = '*' + r + ',' + g + ',' + b + '#'; // use protocol - glue not needed
     console.log(sendString);
     serial.write(sendString);
     newColor = 0;

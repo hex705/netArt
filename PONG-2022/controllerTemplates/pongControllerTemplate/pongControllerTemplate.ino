@@ -22,7 +22,7 @@ MqttClient mqttClient(wifiClient);
 //  playerTwo
 
 String pongPlayerTopic  = "playerOne";
-int MY_PLAYER_INDEX = 1; //set to 1 if playerOne, 2 if playerTwo
+//int MY_PLAYER_INDEX = 1; //set to 1 if playerOne, 2 if playerTwo
 String playerName = "YOUR-NAME"; // your player name
 
 

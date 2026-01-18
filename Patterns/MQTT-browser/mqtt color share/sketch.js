@@ -20,35 +20,6 @@ Adapted for netArt by hex705 (steve daniels) , Jan 2022
 
 */
 
-// how to parse the shiftr token
-// general user:password@url
-
-// MQTT://instanceName:instanceKey@shiftrURL
-
-// shiftrURL (user.cloud.shiftr.io) --> broker.hostname ( this can be public)
-// instanceKey --> creds.mqttPW -- > just token user / instance
-// instanceName --> creds.mqttUser --> the secret part - never public
-
-// MQTT client:
-let mqttClient;
-
-// MQTT broker location and port (shiftr):
-let broker = {
-  hostname: URL_FROM_INSTANCE, // paste URL from token, put in quotes
-  port: 443
-};
-
-// MQTT broker login creds
-// these should be kept private
-let creds = {
-  clientID: DEVICE_NAME_IN_QUOTES,    // "myDeviceName"
-  mqttUser: INSTANCE_OR_USER_NAME,            //  "instanceName"
-  mqttPW:   CHECK_DtwoL_FOR_MQTT_KEY // secret - from token
-};
-
-// topic to subscribe to when you connect:
-let publishTopic = "MY-PUBLISH-TOPIC";
-let subscribeTopic = "MY-PUBLISH-TOPIC"; //out of the box this loops back
 
 // for clarity -- all graphics variables AT BOTTOM of code
 

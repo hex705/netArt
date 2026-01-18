@@ -1,6 +1,5 @@
-// simple serial
-// https://github.com/p5-serial/p5.serialport
-// needs serial control app
+// base project
+// sets up a canvas, displays it in html
 
 let theCanvas;
 

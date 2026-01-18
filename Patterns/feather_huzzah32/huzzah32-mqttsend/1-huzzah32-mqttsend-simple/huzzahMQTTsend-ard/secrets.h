@@ -5,13 +5,33 @@
 //   ***********************
 
 
-// wifi login info
+// =================================
+// hardware layer -- wifi login info
+// =================================
 
-const char ssid[] = "YOUR_WIFI_NAME"; // wifi name
-const char password[] = "YOUR_WIFI_PASSWORD"; // wifi password
+// this can be home credentials or inclass router credentials
+// you can NOT connect to TMU network with this process.  TMU needs wpa2 for enterprise. 
+
+// in rcc357 - during class
+ const char ssid[] = "NETART";    // wifi name
+ const char password[] = "rapiddiamond499";  // wifi password
+
+// in the makerspace
+// const char ssid[] = "makerSpace_netArt";    // wifi name - check 
+// const char password[] = "rapiddiamond499";  // wifi password
 
 
+// at your home you can put your:
+// const char ssid[] = "YOUR_WIFI_NAME"; // wifi name
+// const char password[] = "YOUR_WIFI_PASSWORD"; // wifi password
+
+
+
+
+// =================================
 // shiftr login info
+// =================================
+
 // https://www.shiftr.io/docs/manuals/arduino
 
 // the class token in in D2L
@@ -21,6 +41,6 @@ const char broker[] = "public.cloud.shiftr.io"; // yes this url for SHFTR even w
 int        port     = 1883; // 8883 secure
 
 // user ID for the broker --> derived from links above
-const char id[]     = "MY_ESP32_FEATHER";  // your shiftr device name
+const char id[]     = "a_netArt_FEATHER";  // your shiftr device name
 const char user[]   = "public";    // your shiftr instance
-const char mqttPW[] = "public"; // your shiftr token secret
+const char mqttPW[] = "public";    // your shiftr token secret
