@@ -14,7 +14,9 @@ More information can be found online at [netArt.ca](www.netArt.ca)
 
 The root branch of the online repository was renamed to MAIN in January 2026.
 
-You may need to do some work of you have downloaded an OLDER repository.  The repository should tell you. These commands should solve:
+You may need to do some work of you have downloaded an OLDER repository.  The repository should tell you. 
+
+Navigate to your git folder in terminal, and follow the commands below:
 
 ```
 git branch -m master main
